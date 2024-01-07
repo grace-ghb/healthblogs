@@ -1,5 +1,5 @@
 ---
-name: User story template
+name: Healthblogs - User story template
 about: 'Create template for healthblogs user stories '
 title: ''
 labels: ''

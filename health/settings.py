@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-
 # To let django aware of the env.py file
 if os.path.isfile("env.py"):
     import env
@@ -36,9 +35,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['8000-grace-ghb-healthblogs-uzjzdzzokh.us2.codeanyapp.com']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +47,7 @@ INSTALLED_APPS = [
     'cloudinary',
 
     # Apps
-    'blogs'
+    'blogs',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +65,10 @@ ROOT_URLCONF = 'health.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        # 'DIRS': [TEMPLATES_DIR],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,10 +139,15 @@ STATIC_URL = '/static/'
 
 # Tell django to use cloudinary to store media and static files
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+# 'django.contrib.staticfiles.storage.StaticFilesStorage'
+#  'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA = '/media/'
+MEDIA_URL = '/media/'
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinary.Storage'
 
 # Default primary key field type
